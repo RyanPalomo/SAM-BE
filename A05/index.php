@@ -1,6 +1,17 @@
 <?php
-include("connect.php")
+include("connect.php");
+include("personalities.php");
 
+$personalities = array();
+
+$personalityQuery = "SELECT * FROM `islandsofpersonality`";
+$personalityResult = executeQuery($personalityQuery);
+
+while ($personalityRow = mysqli_fetch_assoc($personalityResult)) {
+  $a = new Personality($personalityRow['name'], $personalityRow['shortDescription'], $personalityRow['longDescription'], $personalityRow['color'], $personalityRow['image']);
+
+  array_push($personalities, $a);
+}
 
   ?>
 <!DOCTYPE html>
@@ -33,31 +44,18 @@ include("connect.php")
       line-height: 1.8;
     }
 
-    /* Create a Parallax Effect */
-    .bgimg-1,
-    .bgimg-2,
-    .bgimg-3 {
-      background-attachment: fixed;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-
     /* First image (Logo. Full height) */
     .bgimg-1 {
-      background-image: url('/w3images/parallax1.jpg');
       min-height: 100%;
     }
 
     /* Second image (Portfolio) */
     .bgimg-2 {
-      background-image: url("/w3images/parallax2.jpg");
       min-height: 400px;
     }
 
     /* Third image (Contact) */
     .bgimg-3 {
-      background-image: url("/w3images/parallax3.jpg");
       min-height: 400px;
     }
 
@@ -86,91 +84,21 @@ include("connect.php")
 
   <div class="container bgimg-1 position-relative opacity-75" id="home">
     <div class="position-absolute top-50 start-50 translate-middle" style="white-space:nowrap;">
-      <span class="p-3 mx-5 bg-dark display-5" style="color: white;">WELCOME TO MY MEMORIES</span>
+      <span class="p-3 mx-5 bg-dark display-5" style="color: white;">WELCOME TO MY CORE MEMORIES</span>
     </div>
   </div>
 
-  <!-- Container (About Section) -->
   <div class="container px-3" id="about">
-    <h3 class="text-center mb-5">CORE MEMORIES</h3>
+    <h3 class="text-center mb-5">MY ISLANDS OF PERSONALITY</h3>
 
     <div class="row" id="personality">
-      <div class="col-4"></div>
-      <div class="col-4"></div>
-      <div class="col-4"></div>
+    <?php
+      foreach ($personalities as $personality) {
+        echo $personality->generateCard();
+      }
+      ?>
       </div>
 
-      <!-- Hide this text on small devices -->
-      <div class="w3-col m6 w3-hide-small w3-padding-large">
-        <p>Welcome to my website. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-          cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing
-          elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-          laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Second Parallax Image with Portfolio Text -->
-  <div class="bgimg-2 w3-display-container w3-opacity-min">
-    <div class="w3-display-middle">
-      <span class="w3-xxlarge w3-text-white w3-wide">PORTFOLIO</span>
-    </div>
-  </div>
-
-  <!-- Container (Portfolio Section) -->
-  <div class="w3-content w3-container w3-padding-64" id="portfolio">
-    <h3 class="w3-center">MY WORK</h3>
-    <p class="w3-center"><em>Here are some of my latest lorem work ipsum tipsum.<br> Click on the images to make them
-        bigger</em></p><br>
-
-    <!-- Responsive Grid. Four columns on tablets, laptops and desktops. Will stack on mobile devices/small screens (100% width) -->
-    <div class="w3-row-padding w3-center">
-      <div class="w3-col m3">
-        <img src="/w3images/p1.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-          alt="The mist over the mountains">
-      </div>
-
-      <div class="w3-col m3">
-        <img src="/w3images/p2.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-          alt="Coffee beans">
-      </div>
-
-      <div class="w3-col m3">
-        <img src="/w3images/p3.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-          alt="Bear closeup">
-      </div>
-
-      <div class="w3-col m3">
-        <img src="/w3images/p4.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-          alt="Quiet ocean">
-      </div>
-    </div>
-
-    <div class="w3-row-padding w3-center w3-section">
-      <div class="w3-col m3">
-        <img src="/w3images/p5.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="The mist">
-      </div>
-
-      <div class="w3-col m3">
-        <img src="/w3images/p6.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-          alt="My beloved typewriter">
-      </div>
-
-      <div class="w3-col m3">
-        <img src="/w3images/p7.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity"
-          alt="Empty ghost train">
-      </div>
-
-      <div class="w3-col m3">
-        <img src="/w3images/p8.jpg" style="width:100%" onclick="onClick(this)" class="w3-hover-opacity" alt="Sailing">
-      </div>
-      <button class="w3-button w3-padding-large w3-light-grey" style="margin-top:64px">LOAD MORE</button>
-    </div>
   </div>
 
   <!-- Modal for full size images on click-->
