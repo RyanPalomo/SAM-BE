@@ -8,7 +8,7 @@ $personalityQuery = "SELECT * FROM `islandsofpersonality`";
 $personalityResult = executeQuery($personalityQuery);
 
 while ($personalityRow = mysqli_fetch_assoc($personalityResult)) {
-  $a = new Personality($personalityRow['name'], $personalityRow['shortDescription'], $personalityRow['longDescription'], $personalityRow['color'], $personalityRow['image']);
+  $a = new Personality($personalityRow['islandOfPersonalityID'], $personalityRow['name'], $personalityRow['shortDescription'], $personalityRow['longDescription'], $personalityRow['color'], $personalityRow['image']);
 
   array_push($personalities, $a);
 }
@@ -41,7 +41,6 @@ while ($personalityRow = mysqli_fetch_assoc($personalityResult)) {
     html {
       height: 100%;
       color: #777;
-      line-height: 1.8;
     }
 
     /* First image (Logo. Full height) */
@@ -73,8 +72,12 @@ while ($personalityRow = mysqli_fetch_assoc($personalityResult)) {
       .bgimg-1,
       .bgimg-2,
       .bgimg-3 {
-        background-attachment: scroll;
         min-height: 400px;
+      }
+    }
+    @media (min-width: 601px) and (max-width: 900px) {
+      .card{
+        min-height: 500px;
       }
     }
   </style>
@@ -82,9 +85,9 @@ while ($personalityRow = mysqli_fetch_assoc($personalityResult)) {
 
 <body>
 
-  <div class="container bgimg-1 position-relative opacity-75" id="home">
-    <div class="position-absolute top-50 start-50 translate-middle" style="white-space:nowrap;">
-      <span class="p-3 mx-5 bg-dark display-5" style="color: white;">WELCOME TO MY CORE MEMORIES</span>
+  <div class="container bgimg-1 d-flex align-items-center justify-content-center" id="home">
+    <div class="text-center">
+      <div class="custom-span p-3 mx-2 display-5" style="color: white; background-color: #655c9e">WELCOME TO MY CORE MEMORIES</div>
     </div>
   </div>
 
@@ -110,97 +113,10 @@ while ($personalityRow = mysqli_fetch_assoc($personalityResult)) {
       <p id="caption" class="w3-opacity w3-large"></p>
     </div>
   </div>
-
-  <!-- Third Parallax Image with Portfolio Text -->
-  <div class="bgimg-3 w3-display-container w3-opacity-min">
-    <div class="w3-display-middle">
-      <span class="w3-xxlarge w3-text-white w3-wide">CONTACT</span>
-    </div>
-  </div>
-
-  <!-- Container (Contact Section) -->
-  <div class="w3-content w3-container w3-padding-64" id="contact">
-    <h3 class="w3-center">WHERE I WORK</h3>
-    <p class="w3-center"><em>I'd love your feedback!</em></p>
-
-    <div class="w3-row w3-padding-32 w3-section">
-      <div class="w3-col m4 w3-container">
-        <img src="/w3images/map.jpg" class="w3-image w3-round" style="width:100%">
-      </div>
-      <div class="w3-col m8 w3-panel">
-        <div class="w3-large w3-margin-bottom">
-          <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Chicago, US<br>
-          <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: +00 151515<br>
-          <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: mail@mail.com<br>
-        </div>
-        <p>Swing by for a cup of <i class="fa fa-coffee"></i>, or leave me a note:</p>
-        <form action="/action_page.php" target="_blank">
-          <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
-            <div class="w3-half">
-              <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
-            </div>
-            <div class="w3-half">
-              <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
-            </div>
-          </div>
-          <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
-          <button class="w3-button w3-black w3-right w3-section" type="submit">
-            <i class="fa fa-paper-plane"></i> SEND MESSAGE
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="w3-center w3-black w3-padding-64 w3-opacity w3-hover-opacity-off">
-    <a href="#home" class="w3-button w3-light-grey"><i class="fa fa-arrow-up w3-margin-right"></i>To the top</a>
-    <div class="w3-xlarge w3-section">
-      <i class="fa fa-facebook-official w3-hover-opacity"></i>
-      <i class="fa fa-instagram w3-hover-opacity"></i>
-      <i class="fa fa-snapchat w3-hover-opacity"></i>
-      <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-      <i class="fa fa-twitter w3-hover-opacity"></i>
-      <i class="fa fa-linkedin w3-hover-opacity"></i>
-    </div>
-    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
-        class="w3-hover-text-green">w3.css</a></p>
-  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
     crossorigin="anonymous"></script>
 </body>
-
-<script>
-  // Modal Image Gallery
-  function onClick(element) {
-    document.getElementById("img01").src = element.src;
-    document.getElementById("modal01").style.display = "block";
-    var captionText = document.getElementById("caption");
-    captionText.innerHTML = element.alt;
-  }
-
-  // Change style of navbar on scroll
-  window.onscroll = function () { myFunction() };
-  function myFunction() {
-    var navbar = document.getElementById("myNavbar");
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-      navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
-    } else {
-      navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
-    }
-  }
-
-  // Used to toggle the menu on small screens when clicking on the menu button
-  function toggleFunction() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-      x.className += " w3-show";
-    } else {
-      x.className = x.className.replace(" w3-show", "");
-    }
-  }
-</script>
 
 </body>
 
