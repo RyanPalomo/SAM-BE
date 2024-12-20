@@ -82,7 +82,7 @@ class IslandContent
     return '
     <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
       <div class="card shadow border-0"> 
-        <img src="' . $this->image . '" alt="' . $this->content . '" class="card-img-top img-fluid rounded">
+        <img src="' . $this->image . '" alt="' . $this->content . '" class="card-img-top img-fluid rounded" style="height: 250px; object-fit:cover; width: 100%;">
         <div class="card-body">
             <p class="text-center"  style="color:' . $this->color . ';">
               ' . $this->content . '
