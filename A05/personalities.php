@@ -80,7 +80,7 @@ class IslandContent
   public function generateContent()
 {
     return '
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 col-sm-6 col-xs-12 mb-4">
       <div class="card shadow border-0"> 
         <img src="' . $this->image . '" alt="' . $this->content . '" class="card-img-top img-fluid rounded">
         <div class="card-body">
