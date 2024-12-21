@@ -54,7 +54,7 @@ class IslandContent
 
   public $id;
 
-  public $pkid;
+  public $fkid;
 
   public $image;
 
@@ -62,12 +62,12 @@ class IslandContent
 
   public $color;
 
-  public function __construct($id, $pkid, $image, $content, $color)
+  public function __construct($id, $fkid, $image, $content, $color)
   {
 
     $this->id = $id;
 
-    $this->pkid = $pkid;
+    $this->fkid = $fkid;
 
     $this->image = $image;
 
