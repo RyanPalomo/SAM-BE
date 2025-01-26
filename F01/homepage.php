@@ -110,8 +110,8 @@ while($trainingRow = mysqli_fetch_assoc($trainingContnentResult)){
     <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="profileDropdown">
       <li><h6 class="dropdown-header">Hi, <?php echo $firstName; ?>!</h6></li>
       <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-      <li><a class="dropdown-item" href="settings.php">Settings</a></li>
+      <li><a class="dropdown-item" href="#">Profile</a></li>
+      <li><a class="dropdown-item" href="#">Settings</a></li>
       <li><hr class="dropdown-divider"></li>
       <li><a class="dropdown-item text-danger" href="logout.php">Logout</a></li>
     </ul>
