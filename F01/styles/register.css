@@ -1,0 +1,27 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Olympic Headline';
+}
+
+.section{
+    height: 100vh;
+}
+
+.form-label{
+    font-family: 'Olympic Sans';
+    margin-bottom: 0px;
+}
+
+.form-control{
+    width: 360px;
+    border-color: black;
+}
+
+button{
+    background-color: #0078D0 !important;
+}
+
+img{
+    padding-top: 50px;
+}

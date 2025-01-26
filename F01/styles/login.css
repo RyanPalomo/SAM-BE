@@ -1,0 +1,26 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Olympic Headline';
+}
+
+.loginContainer{
+    width: 475px;
+    
+}
+
+.username{
+    width: 70%;
+}
+
+.password{
+    width: 70%;
+}
+
+button{
+    background-color: #0078D0 !important;
+}
+
+.form-control, span{
+    border-color: rgb(70, 70, 70) !important;
+}

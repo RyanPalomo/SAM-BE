@@ -1,0 +1,25 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Olympic Headline';
+}
+
+#home{
+    height: 95vh;
+}
+
+.card-text{
+    font-family: 'Olympic Sans' !important;
+}
+
+#event{
+    height: 100%;
+}
+
+.card{
+    min-height: 555px;
+}
+
+#training{
+    height: 100%;
+}
