@@ -22,20 +22,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $type = $_POST['type'];
     $id = $_POST['id'] ?? null;
     $content = $_POST['content'];
-    $image = $_FILES['image']['name'] ?? null;
+    $images = null;
 
-    // Image upload handling
-    if ($image) {
-        $targetDir = "img/";
-        $targetFile = $targetDir . basename($image);
-        move_uploaded_file($_FILES['image']['tmp_name'], $targetFile);
+    // Handle Image Upload
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $uploadDir = '../img/';
+        $fileName = str_replace(' ', '_', basename($_FILES['image']['name'])); // Replace spaces with underscores
+        $fileTmp = $_FILES['image']['tmp_name'];
+        $fileType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+        $allowedTypes = ['jpg', 'jpeg', 'png'];
+        if (in_array($fileType, $allowedTypes)) {
+            $targetFilePath = $uploadDir . $fileName;
+            if (move_uploaded_file($fileTmp, $targetFilePath)) {
+                $images = "img/" . $fileName; // Relative path for database storage
+            } else {
+                die('File upload failed.');
+            }
+        } else {
+            die('Invalid file type.');
+        }
     }
 
+    // Query Execution
     if ($action === 'add') {
-        $query = "INSERT INTO $type (content, image) VALUES ('$content', '$targetFile')";
-    } elseif ($action === 'edit') { 
-        if ($image) {
-            $query = "UPDATE $type SET content='$content', image='$targetFile' WHERE id=$id";
+        $query = "INSERT INTO $type (content, image) VALUES ('$content', '$images')";
+    } elseif ($action === 'edit') {
+        if ($images) {
+            $query = "UPDATE $type SET content='$content', image='$images' WHERE id=$id";
         } else {
             $query = "UPDATE $type SET content='$content' WHERE id=$id";
         }
@@ -44,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     header("Location: dashboard.php");
     exit();
 }
+
 
 // Handle delete operations
 if (isset($_GET['delete']) && isset($_GET['type'])) {

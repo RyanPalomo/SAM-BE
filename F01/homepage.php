@@ -132,7 +132,7 @@ while($trainingRow = mysqli_fetch_assoc($trainingContnentResult)){
                <div class="imgContainer pb-5">
                   <img class="img-fluid" src="img/bigLogo.png">
                </div>
-               <h1 class="mb-0 display-3">Welcome <?php echo $firstName ?>!</h1>
+               <h1 class="mb-0 display-3 text-center">Welcome <?php echo $firstName ?>!</h1>
                <p class="text-center" style="font-family: Olympic Sans;">Meet and Train with our Filipino Olympians</p>
             </div>
    

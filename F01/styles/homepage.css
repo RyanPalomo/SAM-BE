@@ -23,3 +23,7 @@
 #training{
     height: 100%;
 }
+
+.trainCard{
+    max-height: 330px !important;
+}

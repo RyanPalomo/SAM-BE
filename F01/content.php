@@ -39,9 +39,9 @@ class Training {
 
     public function generateTrainCard() {
         return '
-        <div class="col-lg-4 col-md-6 col-12 my-3 d-flex justify-content-center">
+        <div class="trainCard col-lg-4 col-md-6 col-12 my-3 d-flex justify-content-center rounded">
             <img 
-                class="rounded shadow img-fluid" 
+                class="rounded shadow img-fluid " 
                 src="' . $this->img . '" 
                 alt="Training Image" 
                 style="cursor: pointer;" 
